@@ -1,0 +1,41 @@
+server:
+  port: 8989
+
+spring:
+  application:
+    name: jpa-study-1
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    # url: jdbc:h2:tcp://localhost/~/jpastudy;MVCC=TRUE
+    username: sa
+    password:
+
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+      settings:
+        web-allow-others: true
+
+  jpa:
+    hibernate:
+      # create : application start > drop and create (dev environment)
+      ddl-auto: create
+    properties:
+      hibernate:
+        # show_sql: true outputs to System.out > use only in dev environment
+        # Should not be used in production environment
+        # show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    # This is the logger > should be used in dev environment or production environment
+    # Not recommended for production,  For production, set the log level to info or warn
+    org.hibernate.SQL: debug
+    # Method1. This shows the query parameters
+    # Method2. External Library Dependency Injection (gavlyukovskiy)
+    #          While this is convenient in the dev environment, It is crucial to conduct through performance testing before deploying to the production environment
+    org.hibernate.orm.jdbc.bind: trace
