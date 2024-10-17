@@ -45,7 +45,7 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}/edit")
-    public String updateItemForm(@PathVariable Long itemId, Model model) {
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
         Book item = (Book) itemService.findOne(itemId);
         BookForm form = new BookForm();
         form.setId(item.getId());
@@ -59,7 +59,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String update(@PathVariable Long itemId, @ModelAttribute("form") BookForm bookForm) {
+    public String update(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm bookForm) {
         Book book = new Book();
         book.setId(itemId);
         book.setName(bookForm.getName());
