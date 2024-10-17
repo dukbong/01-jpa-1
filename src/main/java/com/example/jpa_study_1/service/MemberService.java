@@ -3,7 +3,6 @@ package com.example.jpa_study_1.service;
 import com.example.jpa_study_1.domain.Member;
 import com.example.jpa_study_1.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

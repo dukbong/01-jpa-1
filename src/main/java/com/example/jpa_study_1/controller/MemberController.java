@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
@@ -45,5 +47,17 @@ public class MemberController {
         member.setAddress(address);
         memberService.join(member);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String list(Model model) {
+        /***
+         * 주의 사항 : API에서는 절대 Entity를 그래도 외부로 보내면 안된다. (DTO를 써라)
+         * 이유 : API 스펙이 변할 수 있으며, 이는 불안정한 스펙이 된다.
+         * 그리고 혹시 모를 민감한 정보가 담겨 있을 수 있다.
+         */
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }
