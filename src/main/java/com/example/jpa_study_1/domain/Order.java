@@ -22,7 +22,10 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member; // 지연 로딩일 경우  member에 프록시 객체를 만들어서 넣어둔다.
+    // >> 이때 bytebuddy클래스에 있는 ByteBuddyInterceptor로 객체륾 만들어 둔다.
+    // 즉 Member member = new ByteBuddyInterceptor(); 이렇게 들어가 있는거다.
+    // 이 상태에서 member 객체에 접근하면 그제서야 DB에서 해당 데이터를 가져와서 넣어주게 된다.
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.example.jpa_study_1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+    @JsonIgnore // XXToOne v1
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 
